@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import { Text, StyleSheet, View, Image, Pressable, Alert } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import app from "@/firebaseConfig"
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 const auth = getAuth(app)
 
 
 
 
-export default function loginScreen(props) {
+export default function LoginScreen(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const logueIn = async()=>{
+  const logueIn = async () => {
     try {
-      await signInWithEmailAndPassword(auth,email,password);
-      Alert.alert("Iniciando sesion","Accediendo...");
+      await signInWithEmailAndPassword(auth, email, password);
+      Alert.alert("Iniciando sesion", "Accediendo...");
       props.navigation.navigate('Home');
     } catch (error) {
       Alert.alert("La contraseña o el usuario no son correctos")
@@ -36,23 +36,28 @@ export default function loginScreen(props) {
           <TextInput
             label="Email"
             placeholder="Email"
-            onChangeText={(text)=>setEmail(text)}
+            onChangeText={(text) => setEmail(text)}
             placeholderTextColor="black"
             style={styles.textinput}
           />
           <TextInput
             label="password"
             placeholder="Contraseña"
-            onChangeText={(text)=>setPassword(text)}
+            onChangeText={(text) => setPassword(text)}
             placeholderTextColor="black"
             secureTextEntry={true}
             style={styles.textinput}
           />
-          <Text style={{ color: 'gray' }}>Olvidó su contraña?</Text>
+          <Pressable onPress={() => props.navigation.navigate('OlvidoClave')}>
+            <Text style={{ color: 'gray' }}>Olvidó su contraña?</Text>
+          </Pressable>
           <Pressable onPress={logueIn} style={styles.button}>
             <Text style={styles.buttonText}>Iniciar sesión</Text>
           </Pressable>
-          <Text style={{textAlign: 'center', marginTop: 10, marginBottom: 150}}>No tienes una cuenta? Crear una</Text>
+          <Pressable onPress={() => props.navigation.navigate('Registrarse')}>
+            <Text style={{ textAlign: 'center', marginTop: 10, marginBottom: 150 }}>No tienes una cuenta?</Text>
+          </Pressable>
+
         </View>
       </View>
     </View>
@@ -98,8 +103,8 @@ const styles = StyleSheet.create({
     width: 350,
     height: 56,
     backgroundColor: 'black',
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   buttonText: {
