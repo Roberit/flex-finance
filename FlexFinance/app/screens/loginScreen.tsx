@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, Image, Pressable, Alert } from 'react-native';
+import { Text, StyleSheet, View, Image, Pressable, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import app from "@/firebaseConfig"
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 const auth = getAuth(app)
-
-
-
 
 export default function LoginScreen(props) {
 
@@ -23,11 +20,13 @@ export default function LoginScreen(props) {
     }
   }
 
-
   return (
-    <View style={styles.padre}>
+    <KeyboardAvoidingView
+      style={styles.padre}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <View>
-        <Image source={require('@/assets/images/FlexFinanceLogo.png')} style={styles.logo} />
+        <Image source={require('@/assets/images/FlexFinanceLogo2.png')} style={styles.logo} />
         <Text style={styles.bienvenida}>Bienvenido!</Text>
       </View>
 
@@ -57,10 +56,9 @@ export default function LoginScreen(props) {
           <Pressable onPress={() => props.navigation.navigate('Registrarse')}>
             <Text style={{ textAlign: 'center', marginTop: 10, marginBottom: 150 }}>No tienes una cuenta?</Text>
           </Pressable>
-
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#F6F6E9',
   },
 
   logo: {

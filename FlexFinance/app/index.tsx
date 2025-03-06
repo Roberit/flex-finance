@@ -7,6 +7,7 @@ import MainScreen from './screens/MainScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ForgotPassword from './screens/ForgotPassword';
 import { NavigationContainer } from '@react-navigation/native';
+import LoginOrRegister from './screens/LoginOrRegister';
 
 
 
@@ -19,6 +20,7 @@ export default function App() {
   function MyStack() {
     return (
       <Stack.Navigator>
+        <Stack.Screen name="Inicio" component={LoginOrRegister} options={{ headerTitle: '', headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerTitle: '', headerShown: false }} />
         <Stack.Screen name="Home" component={MainScreen} options={{ headerTitle: '', headerShown: false }} />
         <Stack.Screen name="Registrarse" component={RegisterScreen} options={{ headerTitle: '', headerShown: false }} />

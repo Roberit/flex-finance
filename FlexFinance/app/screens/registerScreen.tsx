@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, Image, Pressable, Alert, Keyboard } from 'react-native';
+import { Text, StyleSheet, View, Image, Pressable, Alert, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import app from "@/firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -22,34 +22,39 @@ export default function RegisterScreen(props) {
   };
 
   return (
-    <View onTouchCancel={Keyboard.dismiss} style={styles.padre}>
-      <Image source={require('@/assets/images/FlexFinanceLogo2.png')} style={styles.logo} />
-      <Text style={styles.bienvenida}>Registro</Text>
-      <View>
-        <TextInput
-          label="Email"
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-          placeholderTextColor="black"
-          style={styles.textinput}
-        />
-        <TextInput
-          label="password"
-          placeholder="Contraseña"
-          onChangeText={(text) => setPassword(text)}
-          placeholderTextColor="black"
-          secureTextEntry={true}
-          style={styles.textinput}
-        />
+    <KeyboardAvoidingView
+      style={styles.padre}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View onTouchCancel={Keyboard.dismiss} style={styles.padre}>
+        <Image source={require('@/assets/images/FlexFinanceLogo2.png')} style={styles.logo} />
+        <Text style={styles.bienvenida}>Registro</Text>
+        <View>
+          <TextInput
+            label="Email"
+            placeholder="Email"
+            onChangeText={(text) => setEmail(text)}
+            placeholderTextColor="black"
+            style={styles.textinput}
+          />
+          <TextInput
+            label="password"
+            placeholder="Contraseña"
+            onChangeText={(text) => setPassword(text)}
+            placeholderTextColor="black"
+            secureTextEntry={true}
+            style={styles.textinput}
+          />
 
-        <Pressable onPress={register} style={styles.button}>
-          <Text style={styles.buttonText}>Registrarse</Text>
-        </Pressable>
-        <Pressable onPress={() => props.navigation.navigate('Login')}>
-          <Text style={{ textAlign: 'center', marginTop: 10, marginBottom: 150 }}>Ya tienes una cuenta?</Text>
-        </Pressable>
+          <Pressable onPress={register} style={styles.button}>
+            <Text style={styles.buttonText}>Registrarse</Text>
+          </Pressable>
+          <Pressable onPress={() => props.navigation.navigate('Login')}>
+            <Text style={{ textAlign: 'center', marginTop: 10, marginBottom: 150 }}>Ya tienes una cuenta?</Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
