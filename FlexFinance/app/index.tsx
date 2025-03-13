@@ -8,6 +8,9 @@ import RegisterScreen from './screens/RegisterScreen';
 import ForgotPassword from './screens/ForgotPassword';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginOrRegister from './screens/LoginOrRegister';
+import AddExpenseScreen from './screens/AddExpenseScreen';
+import AddIncomeScreen from './screens/AddIncomeScreen';
+import "tailwindcss/tailwind.css";
 
 
 
@@ -25,6 +28,8 @@ export default function App() {
         <Stack.Screen name="Home" component={MainScreen} options={{ headerTitle: '', headerShown: false }} />
         <Stack.Screen name="Registrarse" component={RegisterScreen} options={{ headerTitle: '', headerShown: false }} />
         <Stack.Screen name="OlvidoClave" component={ForgotPassword} options={{ headerTitle: '', headerShown: false }} />
+        <Stack.Screen name="AddExpense" component={AddExpenseScreen} options={{ headerTitle: '', headerShown: false }} />
+        <Stack.Screen name="AddIncome" component={AddIncomeScreen} options={{ headerTitle: '', headerShown: false }} />
       </Stack.Navigator>
     );
   }
